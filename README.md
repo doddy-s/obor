@@ -12,6 +12,6 @@ contains:
 2. pruner (tba)
 
 # Created By
-name: Mohamad Doddy Sujatmiko
-email: doddy.s@protonmail.com
-github: github.com/doddy-s
+- name: Mohamad Doddy Sujatmiko
+- email: doddy.s@protonmail.com
+- github: github.com/doddy-s
