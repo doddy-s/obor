@@ -1,5 +1,7 @@
 import torch
+from typing import Union, List
 from torch.utils.data import Dataset, DataLoader
+import numpy as np
 
 class CustomDataset(Dataset):
     def __init__(self, X, y):
@@ -20,20 +22,27 @@ class CustomDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
-def create_data_loader(X, y, batch_size=32, shuffle=False):
+import torch
+from torch.utils.data import DataLoader, Dataset
+
+def create_data_loader(
+    X: Union[np.ndarray, List, torch.Tensor], 
+    y: Union[np.ndarray, List, torch.Tensor], 
+    batch_size: int = 32, 
+    shuffle: bool = False
+) -> DataLoader:
     """
     Helper function to create DataLoader instances for train, validation, and test datasets.
 
     Args:
-        X (array-like): Training features.
-        y (array-like): Training labels.
+        X (array-like): Training features. Can be a NumPy array, list, or PyTorch tensor.
+        y (array-like): Training labels. Can be a NumPy array, list, or PyTorch tensor.
         batch_size (int): Batch size for DataLoader.
+        shuffle (bool): Whether to shuffle the data.
 
     Returns:
-        train_loader, val_loader, test_loader: DataLoader instances for each dataset.
+        DataLoader: A DataLoader instance for the dataset.
     """
     dataset = CustomDataset(X, y)
-
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-
     return loader

@@ -28,3 +28,6 @@ contains:
 - add pruner sub-package
 - add prune_bbs() function to prune pytorch model with "BANK BALANCE SPARSITY" method
 
+### v0.2.1:
+- add type annotation to train() and craete_data_loader()
+- minor print change

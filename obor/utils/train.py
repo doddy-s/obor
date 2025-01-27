@@ -1,7 +1,18 @@
 import torch
 from tqdm import tqdm
+from typing import Tuple, Dict, List
 
-def train(model, model_name, train_loader, val_loader, optimizer, criterion, scheduler, epochs=16, patience = 4):
+def train(
+    model: torch.nn.Module, 
+    model_name: str, 
+    train_loader: torch.utils.data.Dataset, 
+    val_loader: torch.utils.data.Dataset, 
+    optimizer: torch.optim.Optimizer, 
+    criterion: torch.nn.Module, 
+    scheduler: torch.optim.lr_scheduler.LRScheduler, 
+    epochs: int = 16, 
+    patience: int = 4
+) -> Tuple[torch.nn.Module, Dict[str, Dict[str, List[float]]]]:
     """
     Trains a given model with training and validation data.
 
@@ -39,6 +50,8 @@ def train(model, model_name, train_loader, val_loader, optimizer, criterion, sch
             'accs': []
         }
     }
+    
+    print(f"[OBOR] START OF TRAINING {model_name}")
 
     for epoch in range(epochs):
         # START OF TRAINING
@@ -106,7 +119,7 @@ def train(model, model_name, train_loader, val_loader, optimizer, criterion, sch
             torch.save(model, f'{model_name}-{epoch+1}.pt')
         else:
             patience_counter += 1
-            print(f'No improvement. Patience progress{patience_counter}/{patience}')
+            print(f'No improvement. Patience progress {patience_counter}/{patience}')
 
         if patience_counter >= patience:
             print('Early stopping triggered')
@@ -114,5 +127,7 @@ def train(model, model_name, train_loader, val_loader, optimizer, criterion, sch
 
         # Step the scheduler
         scheduler.step()
+        
+    print(f"[OBOR] END OF TRAINING {model_name}")
 
     return model, history
