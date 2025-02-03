@@ -1,5 +1,5 @@
 import torch
-from tqdm import tqdm  # Import tqdm for progress bar
+from tqdm import tqdm
 
 def test(model: torch.nn.Module, test_loader: torch.utils.data.DataLoader) -> tuple[float, float]:
     """

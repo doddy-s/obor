@@ -12,7 +12,8 @@ contains:
 
 2. pruner
 - prune_bbs()
-- prune_low_magnitude
+- prune_low_magnitude_unstructured()
+- prune_low_magnitude_structured()
 
 3. plotter
 - plot_dynamic()
@@ -51,3 +52,8 @@ contains:
 
 ### v0.3.2
 - hotfix, fix inconsistency x grid in plot_training_history()
+
+### v0.4.0
+- add structured version of low magnitude prune in prune_low_magnitude_structured() function
+- change function name from prune_low_magnitude() to prune_low_magnitude_unstructured()
+- fix plot_dynamic needed title param to not needed

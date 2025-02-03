@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
-def plot_dynamic(data: dict, x_values: list, title: str, x_label: str = "X Values", y_label: str = "Y Values"):
+def plot_dynamic(data: dict, x_values: list, title: str = None, x_label: str = "X Values", y_label: str = "Y Values"):
     """
     Plots dynamic lines based on the input dictionary, with a specified x_values array for the x-axis.
     Assigns the same marker to keys with the same prefix.
@@ -20,7 +20,7 @@ def plot_dynamic(data: dict, x_values: list, title: str, x_label: str = "X Value
         x_label (str): Label for the x-axis. Default is "X Values".
         y_label (str): Label for the y-axis. Default is "Y Values".
     """
-    title = f"{y_label} vs {x_label}" if title == "" else title
+    title = f"{y_label} vs {x_label}" if title == None else title
 
     # Validate that all arrays in the dictionary have the same length as the x_values array
     x_values_length = len(x_values)
@@ -63,6 +63,11 @@ def plot_dynamic(data: dict, x_values: list, title: str, x_label: str = "X Value
     plt.xlabel(x_label, fontsize=11)
     plt.ylabel(y_label, fontsize=11)
     plt.legend(fontsize=11)
+
+    # Ensure all x-values are displayed as ticks
+    plt.xticks(x_values)
+
+    # Add grid
     plt.grid(visible=True, linestyle='--', alpha=0.6)
 
     # Adjust layout and show the plot
